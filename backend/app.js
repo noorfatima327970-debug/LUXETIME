@@ -12,19 +12,31 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-  process.env.CLIENT_URL,
   "http://localhost:5173",
+  "https://luxetime-5oyy.vercel.app",
+  process.env.CLIENT_URL,
 ].filter(Boolean);
 
 app.use(
   cors({
     origin(origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Requests without Origin (browser navigation, server calls)
+      if (!origin) {
         return callback(null, true);
       }
 
-      return callback(new Error("CORS origin not allowed"));
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      console.warn("CORS blocked origin:", origin);
+
+      return callback(null, false);
     },
+
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
