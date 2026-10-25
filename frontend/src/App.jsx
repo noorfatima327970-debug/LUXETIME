@@ -7,10 +7,8 @@ import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import Auth from "./pages/Auth";
-
 import Checkout from "./pages/Checkout";
 import MyOrders from "./pages/MyOrders";
-import Admin from "./pages/Admin";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -31,10 +29,12 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/shop" element={<Shop />} />
+
                 <Route
                   path="/product/:id"
                   element={<ProductDetails />}
                 />
+
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/wishlist" element={<Wishlist />} />
 
@@ -56,11 +56,6 @@ function App() {
                 <Route
                   path="/my-orders"
                   element={<MyOrders />}
-                />
-
-                <Route
-                  path="/admin"
-                  element={<Admin />}
                 />
               </Routes>
             </AuthProvider>
