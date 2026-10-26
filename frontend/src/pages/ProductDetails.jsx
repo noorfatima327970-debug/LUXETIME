@@ -119,10 +119,8 @@ const ProductDetails = () => {
       <Navbar />
 
       <main className="min-h-screen bg-[#FFFCF8] pt-32">
-
         <div className="mx-auto max-w-350 px-6 lg:px-12">
-
-          {/* Breadcrumb */}
+          {/* BREADCRUMB */}
           <div className="mb-12 flex flex-wrap items-center gap-3 text-xs tracking-wide">
             <Link
               to="/"
@@ -147,40 +145,41 @@ const ProductDetails = () => {
             </span>
           </div>
 
-          {/* Main Product */}
+          {/* MAIN PRODUCT */}
           <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-
-            {/* Product Image */}
+            {/* PRODUCT IMAGE */}
             <motion.div
               key={`image-${product.id}`}
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9 }}
-              className="relative"
+              className="relative min-w-0"
             >
               <div className="absolute -top-4 -left-4 h-32 w-32 border-t border-l border-[#C5AD95]/60" />
 
               <div className="relative overflow-hidden rounded-[26px] border border-[#D8C8B7]/50 bg-[#EEE7DE] p-3">
-
                 {product.badge && (
-                  <span className="absolute top-8 left-8 z-10 rounded-full bg-[#3B2F2F] px-5 py-2 text-[10px] tracking-[2px] text-[#E8C9A7]">
+                  <span className="absolute top-5 left-5 z-10 rounded-full bg-[#3B2F2F] px-4 py-2 text-[10px] tracking-[2px] text-[#E8C9A7] sm:top-8 sm:left-8 sm:px-5">
                     {product.badge}
                   </span>
                 )}
 
-                <motion.img
-                  src={product.image}
-                  alt={product.name}
-                  whileHover={{ scale: 1.025 }}
-                  transition={{ duration: 0.8 }}
-                  className="h-112.5 w-full rounded-[18px] object-cover md:h-150"
-                />
+                {/* RESPONSIVE IMAGE CONTAINER */}
+                <div className="flex h-85 w-full items-center justify-center overflow-hidden rounded-[18px] bg-[#EEE7DE] p-5 sm:h-105 sm:p-7 md:h-150 md:p-0">
+                  <motion.img
+                    src={product.image}
+                    alt={product.name}
+                    whileHover={{ scale: 1.025 }}
+                    transition={{ duration: 0.8 }}
+                    className="h-full w-full object-contain md:object-cover"
+                  />
+                </div>
               </div>
 
               <div className="absolute -right-4 -bottom-4 h-32 w-32 border-r border-b border-[#C5AD95]/60" />
             </motion.div>
 
-            {/* Product Info */}
+            {/* PRODUCT INFO */}
             <motion.div
               key={`info-${product.id}`}
               initial={{ opacity: 0, y: 25 }}
@@ -230,18 +229,19 @@ const ProductDetails = () => {
                   `Experience timeless craftsmanship with the ${product.name}.`}
               </p>
 
-              {/* Quantity */}
+              {/* QUANTITY */}
               <div className="mt-10">
                 <p className="mb-5 text-xs font-semibold tracking-[2px] text-[#3B2F2F] uppercase">
                   Select Quantity
                 </p>
 
                 <div className="inline-flex items-center overflow-hidden rounded-full border border-[#D6C4B1] bg-[#F5F1E9]">
-
                   <button
                     type="button"
                     onClick={() =>
-                      setQuantity((prev) => Math.max(1, prev - 1))
+                      setQuantity((prev) =>
+                        Math.max(1, prev - 1)
+                      )
                     }
                     aria-label="Decrease quantity"
                     className="cursor-pointer px-5 py-4 text-[#3B2F2F]"
@@ -255,7 +255,9 @@ const ProductDetails = () => {
 
                   <button
                     type="button"
-                    onClick={() => setQuantity((prev) => prev + 1)}
+                    onClick={() =>
+                      setQuantity((prev) => prev + 1)
+                    }
                     aria-label="Increase quantity"
                     className="cursor-pointer px-5 py-4 text-[#3B2F2F]"
                   >
@@ -264,7 +266,7 @@ const ProductDetails = () => {
                 </div>
               </div>
 
-              {/* Buttons */}
+              {/* ACTION BUTTONS */}
               <div className="mt-10 flex items-center gap-4">
                 <motion.button
                   type="button"
@@ -288,7 +290,9 @@ const ProductDetails = () => {
 
                 <motion.button
                   type="button"
-                  onClick={() => toggleWishlist(product.id)}
+                  onClick={() =>
+                    toggleWishlist(product.id)
+                  }
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.97 }}
                   aria-label="Toggle wishlist"
@@ -322,24 +326,26 @@ const ProductDetails = () => {
             </motion.div>
           </div>
 
-          {/* Benefits */}
+          {/* BENEFITS */}
           <div className="mt-24 grid grid-cols-1 gap-8 border-y border-[#DED2C5] py-12 md:grid-cols-3">
-
             {[
               {
                 icon: FiTruck,
                 title: "Delivery Information",
-                description: "Details available during demo checkout.",
+                description:
+                  "Details available during demo checkout.",
               },
               {
                 icon: FiShield,
                 title: "Quality Selection",
-                description: "A curated collection of elegant timepieces.",
+                description:
+                  "A curated collection of elegant timepieces.",
               },
               {
                 icon: FiRefreshCw,
                 title: "Customer Assistance",
-                description: "Explore our demo shopping experience.",
+                description:
+                  "Explore our demo shopping experience.",
               },
             ].map(({ icon: Icon, title, description }) => (
               <div
@@ -363,7 +369,7 @@ const ProductDetails = () => {
             ))}
           </div>
 
-          {/* Related Watches */}
+          {/* RELATED WATCHES */}
           {relatedProducts.length > 0 && (
             <section className="py-28">
               <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
@@ -399,13 +405,13 @@ const ProductDetails = () => {
                     to={`/product/${item.id}`}
                     className="group"
                   >
-                    <div className="overflow-hidden rounded-[22px] border border-[#D8C8B7]/40 bg-[#F0EAE2]">
+                    <div className="flex h-87.5 items-center justify-center overflow-hidden rounded-[22px] border border-[#D8C8B7]/40 bg-[#F0EAE2] p-5 md:p-0">
                       <motion.img
                         src={item.image}
                         alt={item.name}
                         whileHover={{ scale: 1.035 }}
                         transition={{ duration: 0.8 }}
-                        className="h-87.5 w-full object-cover"
+                        className="h-full w-full object-contain md:object-cover"
                       />
                     </div>
 
